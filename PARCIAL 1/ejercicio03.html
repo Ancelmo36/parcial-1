@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue 3 - Mostrar Mensaje</title>
+  <script src="https://unpkg.com/vue@3.2.47"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="toggleMensaje">Mostrar/Ocultar Mensaje</button>
+    <p v-if="mostrar">Este es el mensaje que aparece al hacer clic en el botón.</p>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const mostrar = ref(false);
+
+        const toggleMensaje = () => {
+          mostrar.value = !mostrar.value;
+        };
+
+        return { mostrar, toggleMensaje };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

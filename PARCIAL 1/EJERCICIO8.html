@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Condicionalmente Renderizar Enunciado</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .app {
+        text-align: center;
+        max-width: 400px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="app">
+      <h1>Condicionalmente Renderizar Enunciado</h1>
+      
+      <p v-if="isLoggedIn">
+        ¡Bienvenido de nuevo, usuario! 😃
+      </p>
+      <p v-else>
+        Por favor, inicia sesión para continuar. 🛑
+      </p>
+
+      <button @click="toggleLogin">
+        {{ isLoggedIn ? 'Cerrar Sesión' : 'Iniciar Sesión' }}
+      </button>
+    </div>
+
+    <script>
+      const { createApp, ref } = Vue;
+
+      createApp({
+        setup() {
+          // Variable reactiva para manejar si el usuario está logueado o no
+          const isLoggedIn = ref(false);
+
+          // Función para cambiar el estado de logged in / logged out
+          const toggleLogin = () => {
+            isLoggedIn.value = !isLoggedIn.value;
+          };
+
+          return {
+            isLoggedIn,
+            toggleLogin,
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

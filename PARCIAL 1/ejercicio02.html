@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js - Contador de clics</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Contador de Clics: {{ contador }}</h1>
+        <button @click="incrementar">Haz clic aquí</button>
+      </div>
+      <script>
+        new Vue({
+          el: '#app', // Vinculamos Vue a nuestro div con id "app"
+          data: {
+            contador: 0 // Definimos una variable contador dentro del objeto data
+          },
+          methods: {
+            incrementar() {
+              this.contador++; // Este método se ejecuta cada vez que el usuario hace clic en el botón
+            }
+          }
+        });
+      </script>
+</body>
+</html>

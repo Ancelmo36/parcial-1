@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nombre Completo Computado</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .app {
+        text-align: center;
+        max-width: 400px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      input {
+        padding: 10px;
+        margin: 10px;
+        width: 80%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="app">
+      <h1>Propiedad Computada: Nombre Completo</h1>
+
+      <input v-model="firstName" placeholder="Nombre" />
+      <input v-model="lastName" placeholder="Apellido" />
+
+      <p>Nombre Completo: <strong>{{ fullName }}</strong></p>
+    </div>
+
+    <script>
+      const { createApp, ref, computed } = Vue;
+
+      createApp({
+        setup() {
+          const firstName = ref(''); // Variable reactiva para el nombre
+          const lastName = ref('');  // Variable reactiva para el apellido
+
+          // Propiedad computada para generar el nombre completo
+          const fullName = computed(() => {
+            return `${firstName.value} ${lastName.value}`;
+          });
+
+          return {
+            firstName,
+            lastName,
+            fullName
+          };
+        }
+      }).mount('#app');
+    </script>
+  </body>
+</html>

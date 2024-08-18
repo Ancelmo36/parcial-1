@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tareas</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .todo-app {
+        text-align: center;
+        max-width: 400px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+      }
+
+      input {
+        padding: 10px;
+        margin-right: 10px;
+        width: 70%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 10px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      li button {
+        background-color: #f44336;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: white;
+      }
+
+      li button:hover {
+        background-color: #e53935;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="todo-app">
+      <h1>Lista de Tareas</h1>
+
+      <input
+        v-model="newTask"
+        placeholder="Agregar nueva tarea"
+        @keyup.enter="addTask"
+      />
+      <button @click="addTask">Agregar Tarea</button>
+
+      <ul>
+        <li v-for="(task, index) in tasks" :key="index">
+          {{ task }}
+          <button @click="deleteTask(index)">Eliminar</button>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const { createApp, ref } = Vue;
+
+      createApp({
+        setup() {
+          const tasks = ref([]); // Referencia para la lista de tareas
+          const newTask = ref(''); // Referencia para la nueva tarea
+
+          // Función para agregar una nueva tarea
+          const addTask = () => {
+            if (newTask.value.trim()) {
+              tasks.value.push(newTask.value);
+              newTask.value = ''; // Limpiar el campo de entrada
+            }
+          };
+
+          // Función para eliminar una tarea por índice
+          const deleteTask = (index) => {
+            tasks.value.splice(index, 1);
+          };
+
+          return {
+            tasks,
+            newTask,
+            addTask,
+            deleteTask,
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

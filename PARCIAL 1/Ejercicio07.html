@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue 3 - Cambiar Tema Oscuro/Claro</title>
+  <script src="https://unpkg.com/vue@3.2.47"></script>
+  <style>
+    body.light {
+      background-color: white;
+      color: black;
+    }
+
+    body.dark {
+      background-color: black;
+      color: white;
+    }
+
+    .theme-button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body :class="tema">
+  <div id="app">
+    <button @click="toggleTema" class="theme-button">
+      Cambiar a {{ tema === 'light' ? 'Oscuro' : 'Claro' }}
+    </button>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const tema = ref('light');
+
+        const toggleTema = () => {
+          tema.value = tema.value === 'light' ? 'dark' : 'light';
+          document.body.className = tema.value; // Actualiza la clase del body
+        };
+
+        return { tema, toggleTema };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
